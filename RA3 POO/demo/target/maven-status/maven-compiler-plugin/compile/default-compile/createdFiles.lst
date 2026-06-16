@@ -1,3 +1,11 @@
+com\capitulozero\view\ButtonView.class
+com\capitulozero\MainApplication.class
+com\capitulozero\view\AboutUsView.class
+com\capitulozero\view\AutoresView.class
+com\capitulozero\view\ClientesView.class
+com\capitulozero\view\DashboardView.class
+com\capitulozero\view\LivrosView.class
+com\capitulozero\view\CarrinhoView.class
 module-info.class
-com\example\demo\HelloApplication.class
-com\example\demo\HelloController.class
+com\capitulozero\view\VendasView.class
+com\capitulozero\view\SideBarView.class
