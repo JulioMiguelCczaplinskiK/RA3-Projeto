@@ -24,11 +24,12 @@ public class DashboardView extends VBox{
         this.setBackground(new Background(new BackgroundFill(corFundo, CornerRadii.EMPTY, Insets.EMPTY)));
         this.setAlignment(alinhamento);
         //conteudoAberto = "📱 Dashboard";
-        pai.getChildren().add(this);
+
 
 
         opcoes = new ArrayList<>(List.of("📱 Dashboard","📚 Livros","👤 Autores","🛒 Carrinho","💵 Vendas","👥 Clientes","🙎‍♂️ ABOUT US"));
 
+        criarPreset();
     }
 
     public void criarPreset(){
@@ -42,6 +43,7 @@ public class DashboardView extends VBox{
 
         temp.getChildren().add(tempLabel);
 
+        this.getChildren().add(temp);
     }
 
 

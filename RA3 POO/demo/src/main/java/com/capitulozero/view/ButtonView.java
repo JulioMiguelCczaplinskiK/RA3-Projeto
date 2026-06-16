@@ -22,10 +22,8 @@ public class ButtonView extends Button{
         atualizarVisual(false);
 
         this.setOnAction(event -> {
-
             // Avisa a Sidebar que esta opção foi clicada
             SideBarView.selecionarAba(text);
-
         });
         pai.getChildren().add(this);
     }

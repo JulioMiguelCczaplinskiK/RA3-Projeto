@@ -6,7 +6,6 @@ import com.capitulozero.view.SideBarView;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,15 +19,18 @@ import java.io.IOException;
 
 public class MainApplication extends Application {
 
+    private SideBarView sideBar;
+
+
     @Override
     public void start(Stage stage) throws IOException {
 
-        // Cria o layout do fundo
+        // Cria o layout para a aplicacao
         HBox base = new HBox();
 
 
         // Cria a sidebar com todos os componentes
-        SideBarView sideBar = new SideBarView(Theme.larguraSideBar,Theme.alturaTela,Theme.larguraSideBar,Theme.alturaTela,20,Theme.COR_BACKGROUND_PRIMARIO,Pos.TOP_CENTER);
+        sideBar = new SideBarView(Theme.larguraSideBar,Theme.alturaTela,Theme.larguraSideBar,Theme.alturaTela,20,Theme.COR_BACKGROUND_PRIMARIO,Pos.TOP_CENTER);
 
         base.getChildren().add(sideBar);
         HBox.setHgrow(sideBar, Priority.SOMETIMES);
@@ -51,7 +53,7 @@ public class MainApplication extends Application {
         double larguraConteudoOpcoes = (Theme.larguraTela-Theme.larguraSideBar)-espacamento;
         double alturaConteudoOpcoes = Theme.alturaTela-espacamento;
 
-
+        
         //Cria a Vbox para a troca de conteudo
         VBox conteudoOpcoes = new VBox();
         conteudoOpcoes.setPrefSize(larguraConteudoOpcoes,alturaConteudoOpcoes);
@@ -62,9 +64,9 @@ public class MainApplication extends Application {
 
         content.getChildren().add(conteudoOpcoes);
 
-
-        DashboardView conteudoDoDashboard = new DashboardView(content,100,100,100,100,new Insets(10),Theme.COR_BACKGROUND_TERCEARIO,Theme.COR_TEXT_PRIMARIO,Pos.TOP_CENTER);
-
+        // Registra o container de opcoes na Sidebar e abre a aba inicial
+        SideBarView.setConteudoOpcoes(conteudoOpcoes);
+        SideBarView.selecionarAba("📱 Dashboard");
 
 
 
