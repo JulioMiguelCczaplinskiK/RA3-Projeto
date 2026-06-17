@@ -1,8 +1,8 @@
 package com.capitulozero.view;
 
-import com.capitulozero.colecao.ColecaoClientes;
+import com.capitulozero.colecao.ColecaoVendedores;
 import com.capitulozero.config.Theme;
-import com.capitulozero.model.ClienteModel;
+import com.capitulozero.model.VendedorModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.io.*;
 
 import static java.lang.Integer.parseInt;
-public class ClientesView extends VBox {
+public class VendedoresView extends VBox {
 
-    private final ArrayList<Pane> linhasClientes = new ArrayList<>();
+    private final ArrayList<Pane> linhasVendedores = new ArrayList<>();
     private Integer matriculaEdicao = null;
 
     private TextField nomeInput;
@@ -26,33 +26,33 @@ public class ClientesView extends VBox {
     private Label labelModoEdicao;
 
     public void carregarDados(){
-        this.getChildren().removeAll(linhasClientes);
-        linhasClientes.clear();
+        this.getChildren().removeAll(linhasVendedores);
+        linhasVendedores.clear();
 
-        ArrayList<ClienteModel> colecao = ColecaoClientes.lerLista();
-        for (ClienteModel cliente1 : colecao){
+        ArrayList<VendedorModel> colecao = ColecaoVendedores.lerLista();
+        for (VendedorModel vendedor1 : colecao){
             // nome
-            Label labelNome1 = new Label("Nome: " + cliente1.getNome());
+            Label labelNome1 = new Label("Nome: " + vendedor1.getNome());
             labelNome1.relocate(30,0);
             // matricula
-            Label labelMatricula1 = new Label("Matrícula: " + cliente1.getMatricula());
+            Label labelMatricula1 = new Label("Matrícula: " + vendedor1.getMatricula());
             labelMatricula1.relocate(130,0);
             // comissão
-            Label labelComissao1 = new Label("Comissão: " + cliente1.getComissao());
+            Label labelComissao1 = new Label("Comissão: " + vendedor1.getComissao());
             labelComissao1.relocate(230,0);
 
             Button editar = new Button("Editar");
             editar.setOnAction(e -> {
-                matriculaEdicao = cliente1.getMatricula();
-                nomeInput.setText(cliente1.getNome());
-                matriculaInput.setText(String.valueOf(cliente1.getMatricula()));
-                comissaoInput.setText(String.valueOf(cliente1.getComissao()));
-                labelModoEdicao.setText("Editando " + cliente1.getNome());
+                matriculaEdicao = vendedor1.getMatricula();
+                nomeInput.setText(vendedor1.getNome());
+                matriculaInput.setText(String.valueOf(vendedor1.getMatricula()));
+                comissaoInput.setText(String.valueOf(vendedor1.getComissao()));
+                labelModoEdicao.setText("Editando " + vendedor1.getNome());
             });
             editar.relocate(330,0);
             Button deletar = new Button("Deletar");
             deletar.setOnAction(e -> {
-                ColecaoClientes.deletarCliente(cliente1.getMatricula());
+                ColecaoVendedores.deletarVendedor(vendedor1.getMatricula());
                 carregarDados();
             });
             deletar.relocate(430,0);
@@ -61,10 +61,10 @@ public class ClientesView extends VBox {
             root.setPrefHeight(30);
             root.getChildren().addAll(labelNome1,labelMatricula1,labelComissao1,editar,deletar);
             this.getChildren().add(root);
-            linhasClientes.add(root);
+            linhasVendedores.add(root);
         }
     }
-    public ClientesView(double largura, double altura) {
+    public VendedoresView(double largura, double altura) {
         this.getStylesheets().add(
                 getClass().getResource("/com/capitulozero/style/style.css").toExternalForm()
         );
@@ -76,14 +76,14 @@ public class ClientesView extends VBox {
         if (!pastaColecao.exists()) {
             pastaColecao.mkdirs();
         }
-        File arquivo = new File(pastaColecao, "clientes.ser");
-        Label label = new Label("👥 Cadastro de Clientes");
+        File arquivo = new File(pastaColecao, "vendedores.ser");
+        Label label = new Label("👥 Cadastro de Vendedores");
         label.setTextFill(Theme.COR_TEXT_PRIMARIO);
         label.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
         this.getChildren().add(label);
         // título do modo de edição (fica vazio fora do modo de edição)
         labelModoEdicao = new Label();
-//        labelModoEdicao.setStyle("-fx-font-weight: bold;");
+        labelModoEdicao.setStyle("-fx-font-weight: bold;");
         this.getChildren().add(labelModoEdicao);
         // nome
         Label labelNome = new Label("Nome:");
@@ -104,14 +104,14 @@ public class ClientesView extends VBox {
             String textoNome = nomeInput.getText();
             int intMatricula = parseInt(matriculaInput.getText());
             double doubleComissao = Double.parseDouble(comissaoInput.getText());
-            ClienteModel cliente = new ClienteModel(textoNome, intMatricula, doubleComissao);
+            VendedorModel vendedor = new VendedorModel(textoNome, intMatricula, doubleComissao);
 
             if (matriculaEdicao != null) {
-                ColecaoClientes.editarCliente(matriculaEdicao, cliente);
+                ColecaoVendedores.editarVendedor(matriculaEdicao, vendedor);
                 matriculaEdicao = null;
                 labelModoEdicao.setText("");
             } else {
-                ColecaoClientes.adicionarCliente(cliente);
+                ColecaoVendedores.adicionarVendedor(vendedor);
             }
 
             nomeInput.clear();

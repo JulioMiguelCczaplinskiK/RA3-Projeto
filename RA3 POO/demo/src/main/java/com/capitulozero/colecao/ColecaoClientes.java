@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ColecaoClientes {
 
-    private static final String CAMINHO_ARQUIVO = "clientes.ser";
+    private static final String CAMINHO_ARQUIVO = "src/main/java/com/capitulozero/colecao/clientes.ser";
 
     // Escreve uma lista de objetos no arquivo
     public static void salvarLista(ArrayList<ClienteModel> clientes) {
@@ -49,6 +49,24 @@ public class ColecaoClientes {
     public static void adicionarCliente(ClienteModel novoCliente) {
         ArrayList<ClienteModel> clientes = lerLista();
         clientes.add(novoCliente);
+        salvarLista(clientes);
+    }
+    // Deleta cliente da lista caso user seja = ao número da matrícula
+    public static void deletarCliente(int matricula) {
+        ArrayList<ClienteModel> clientes = lerLista();
+        clientes.removeIf(c -> c.getMatricula() == matricula);
+        salvarLista(clientes);
+    }
+
+    // Substitui os dados do cliente identificado pela matrícula original
+    public static void editarCliente(int matriculaOriginal, ClienteModel clienteAtualizado) {
+        ArrayList<ClienteModel> clientes = lerLista();
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getMatricula() == matriculaOriginal) {
+                clientes.set(i, clienteAtualizado);
+                break;
+            }
+        }
         salvarLista(clientes);
     }
 }
