@@ -98,28 +98,33 @@ public class VendedoresView extends VBox {
         comissaoInput = new TextField();
         comissaoInput.setPromptText("Comissão");
         // Envio
+
         Button submitButton = new Button("Salvar");
         submitButton.setOnAction(e -> {
-            // primeiro pega os dados
-            String textoNome = nomeInput.getText();
-            int intMatricula = parseInt(matriculaInput.getText());
-            double doubleComissao = Double.parseDouble(comissaoInput.getText());
-            VendedorModel vendedor = new VendedorModel(textoNome, intMatricula, doubleComissao);
+            try {
+                // primeiro pega os dados
+                String textoNome = nomeInput.getText();
+                int intMatricula = parseInt(matriculaInput.getText());
+                double doubleComissao = Double.parseDouble(comissaoInput.getText());
+                VendedorModel vendedor = new VendedorModel(textoNome, intMatricula, doubleComissao);
 
-            if (matriculaEdicao != null) {
-                ColecaoVendedores.editarVendedor(matriculaEdicao, vendedor);
-                matriculaEdicao = null;
-                labelModoEdicao.setText("");
-            } else {
-                ColecaoVendedores.adicionarVendedor(vendedor);
+                if (matriculaEdicao != null) {
+                    ColecaoVendedores.editarVendedor(matriculaEdicao, vendedor);
+                    matriculaEdicao = null;
+                    labelModoEdicao.setText("");
+                } else {
+                    ColecaoVendedores.adicionarVendedor(vendedor);
+                }
+
+                nomeInput.clear();
+                matriculaInput.clear();
+                comissaoInput.clear();
+
+                carregarDados();
+            } catch (NumberFormatException ex) {
+                Alert alerta = new Alert(Alert.AlertType.ERROR, "Informe os valores de Matrícula e Comissão corretamente.");
+                alerta.showAndWait();
             }
-
-            nomeInput.clear();
-            matriculaInput.clear();
-            comissaoInput.clear();
-
-            carregarDados();
-
         });
         this.getChildren().add(labelNome);
         this.getChildren().add(nomeInput);
