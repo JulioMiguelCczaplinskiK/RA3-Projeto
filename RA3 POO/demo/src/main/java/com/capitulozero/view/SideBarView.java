@@ -17,9 +17,13 @@ public class SideBarView extends VBox {
     private ArrayList<String> opcoes;
     private static List<ButtonView> botoes; // Lista para guardar as referências dos botões
 
+    public static String conteudoAberto;
+    private static VBox conteudoOpcoes;
     private double larguraPreferivelBotao;
 
-    public static String conteudoAberto;
+    public static void setConteudoOpcoes(VBox vBox) {
+        conteudoOpcoes = vBox;
+    }
 
     public SideBarView(double larguraPreferivel, double alturaPreferivel, double larguraMaxima, double alturaMaxima,double padding, Color corFundo, Pos alinhamento){
         this.setPrefSize(larguraPreferivel, alturaPreferivel);
@@ -53,6 +57,7 @@ public class SideBarView extends VBox {
 
 
         // ESSA PARTE PRECISA SER DIMINUIDA
+        // ACREDITO SER POSSIVER DIMINUIR
         HBox menuBox = new HBox();
         menuBox.setPrefSize(larguraPreferivelBotao, 30);
         menuBox.setBackground(new Background(new BackgroundFill(Theme.COR_BACKGROUND_PRIMARIO,CornerRadii.EMPTY, Insets.EMPTY)));
@@ -63,8 +68,6 @@ public class SideBarView extends VBox {
         menuPrincipal.setTextFill(Theme.COR_TEXT_PRIMARIO);
         menuPrincipal.setAlignment(Pos.CENTER_LEFT);
         menuBox.getChildren().add(menuPrincipal);
-        // ACREDITO SER POSSIVER DIMINUIR
-
     }
 
     public void criarBotoes(){
@@ -82,7 +85,51 @@ public class SideBarView extends VBox {
     // Metodo chamado quando um botão é clicado
     public static void selecionarAba(String novaAba) {
         conteudoAberto = novaAba;
+
         atualizarEstadosBotoes(); // Atualiza visualmente todos
+
+        if (conteudoOpcoes != null) {
+            conteudoOpcoes.getChildren().clear();
+            double w = conteudoOpcoes.getPrefWidth();
+            double h = conteudoOpcoes.getPrefHeight();
+
+            switch (novaAba) {
+                case "📱 Dashboard":
+                    conteudoOpcoes.getChildren().add(new DashboardView(
+                        conteudoOpcoes,
+                        w, h, w, h,
+                        new Insets(10),
+                        Theme.COR_BACKGROUND_TERCEARIO,
+                        Theme.COR_TEXT_PRIMARIO,
+                        Pos.CENTER
+                    ));
+                    break;
+                case "📚 Livros":
+                    conteudoOpcoes.getChildren().add(new LivrosView(w, h));
+                    break;
+                case "👤 Autores":
+                    conteudoOpcoes.getChildren().add(new AutoresView(w, h));
+                    break;
+                case "🛒 Carrinho":
+                    conteudoOpcoes.getChildren().add(new CarrinhoView(w, h));
+                    break;
+                case "💵 Vendas":
+                    conteudoOpcoes.getChildren().add(new VendasView(w, h));
+                    break;
+                case "👥 Clientes":
+                    conteudoOpcoes.getChildren().add(new ClientesView(w, h));
+                    break;
+                case "🙎‍♂️ ABOUT US":
+                    conteudoOpcoes.getChildren().add(new AboutUsView(w, h));
+                    break;
+                default:
+                    Label label = new Label("Aba '" + novaAba + "' em construção...");
+                    label.setTextFill(Theme.COR_TEXT_PRIMARIO);
+                    label.setStyle("-fx-font-size: 20px;");
+                    conteudoOpcoes.getChildren().add(label);
+                    break;
+            }
+        }
     }
 
     // Percorre todos os botões e atualiza a cor baseada no estado atual
