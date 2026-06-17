@@ -36,7 +36,7 @@ public class SideBarView extends VBox {
 
         // BOTOES
         botoes = new ArrayList<>();
-        opcoes = new ArrayList<>(List.of("📱 Dashboard","📚 Livros","👤 Autores","🛒 Carrinho","💵 Vendas","👥 Clientes","🙎‍♂️ ABOUT US"));
+        opcoes = new ArrayList<>(List.of("📱 Dashboard","📚 Livros","👤 Autores","🛒 Carrinho","💵 Vendas","👥 Clientes","👥 Vendedor","🙎‍♂️ ABOUT US"));
         larguraPreferivelBotao = larguraPreferivel;
 
 
@@ -116,8 +116,8 @@ public class SideBarView extends VBox {
                 case "💵 Vendas":
                     conteudoOpcoes.getChildren().add(new VendasView(w, h));
                     break;
-                case "👥 Clientes":
-                    conteudoOpcoes.getChildren().add(new ClientesView(w, h));
+                case "👥 Vendedor":
+                    conteudoOpcoes.getChildren().add(new VendedoresView(w, h));
                     break;
                 case "🙎‍♂️ ABOUT US":
                     conteudoOpcoes.getChildren().add(new AboutUsView(w, h));
