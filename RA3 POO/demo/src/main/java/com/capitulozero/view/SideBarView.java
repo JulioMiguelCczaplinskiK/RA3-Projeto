@@ -122,6 +122,12 @@ public class SideBarView extends VBox {
                 case "👥 Vendedor":
                     conteudoOpcoes.getChildren().add(new VendedoresView(w, h));
                     break;
+                case "Estoque":
+                    conteudoOpcoes.getChildren().add(new EstoqueView(w, h));
+                    break;
+                case "Produto Papelaria":
+                    conteudoOpcoes.getChildren().add(new ProdutoPapelariaView(w, h));
+                    break;
                 case "🙎‍♂️ ABOUT US":
                     conteudoOpcoes.getChildren().add(new AboutUsView(w, h));
                     break;
