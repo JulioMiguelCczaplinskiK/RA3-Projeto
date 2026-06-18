@@ -3,9 +3,9 @@ package com.capitulozero.model;
 import java.io.Serializable;
 
 public class VendedorModel implements Serializable {
-    String nome;
-    int matricula;
-    double comissao;
+    private String nome;
+    private int matricula;
+    private double comissao;
 
     public VendedorModel(String nome, int matricula, double comissao){
         this.nome = nome;
