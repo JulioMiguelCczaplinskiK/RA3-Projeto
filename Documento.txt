@@ -1,0 +1,445 @@
+
+PONTIFÍCIA UNIVERSIDADE CATÓLICA DO PARANÁ
+ENGENHARIA DE SOFTWARE
+PROGRAMAÇÃO ORIENTADA A OBJETOS 
+
+
+JULIO MIGUEL CZAPLINSKI KUCHUMINSKI
+EMANUEL HENRIQUE MARCINEK SILVA
+GABRIEL MOLETA ROSSI
+JOÃO …
+GUSTAVO PIZATO BOGANIKA
+
+
+
+
+
+
+
+
+
+
+
+
+
+Capítulo Zero
+Aplicação desktop para venda de livros
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PINHAIS
+2026
+RESUMO
+Capítulo Zero é uma aplicação desktop desenvolvida em Java com JavaFX para a gestão completa de uma livraria. O sistema permite o cadastro, consulta, atualização e exclusão (CRUD) de entidades fundamentais para o negócio, como Livros, Autores, Clientes e Vendas. Diferente de sistemas web, esta aplicação roda nativamente no sistema operacional do usuário, garantindo desempenho e acesso local aos dados.
+
+A interface gráfica será construída exclusivamente via código Java, sem o uso de SceneBuilder ou FXML, seguindo rigorosamente as diretrizes acadêmicas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RESUMO	2
+Controle de Versão e Histórico de Documentos	4
+1. Guia de Atualização de Documentos	4
+2. Estrutura de Arquivos e Histórico	5
+Introdução	6
+Objetivos	7
+1. Objetivo Geral	7
+2. Objetivos Específicos	7
+Requisitos do Sistema	8
+1. Requisitos Funcionais (RF)	8
+2. Requisitos Não Funcionais (RNF)	8
+Escopo dos CRUDs (10 Módulos)	9
+Requisitos Teóricos e Técnicos (JavaFX)	10
+1. Componentes de Interface (UI Controls)	10
+2. Layouts (Gerenciadores de Posicionamento)	10
+3. Conceitos Avançados	10
+Identidade Visual e Interface	11
+1. Tipografia	11
+2. Estrutura da Main (Janela Principal)	11
+Divisão de Tarefas e Equipe	12
+Tarefas Comuns (Todos os alunos):	12
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Controle de Versão e Histórico de Documentos
+Esta seção estabelece as regras para manter o histórico do projeto, garantir que todos saibam qual versão das regras estão seguindo e padronizar o uso do Git para commits.
+
+1. Guia de Atualização de Documentos
+Quando um documento precisar ser alterado, siga estritamente este fluxo para evitar perda de informação ou confusão na equipe:
+
+
+Identifique a Necessidade:
+Avise no chat do grupo (WhatsApp) que você está criando um novo arquivo. Para evitar a fragmentação de arquivos.
+Mande o link do documento que está sendo reformulado.
+Correção de erro de digitação ou explicação: Atualize a versão MINOR (ex: 1.0 → 1.1).
+Mudança de escopo, novas regras de negócio ou refatoração de arquitetura: Atualize a versão MAJOR (ex: 1.x → 2.0).
+
+Crie a Nova Versão (Não edite o arquivo antigo!):
+Crie uma cópia do arquivo antigo
+Abra o novo arquivo e altere a linha do título para a nova versão.
+Adicione um bloco de "Changelog" no topo do novo arquivo (veja o modelo abaixo).
+
+Comente as Mudanças:
+Exemplo: "Alterado: A regra de validação de CPF agora aceita apenas números."
+Comunique a Equipe: Avise no chat do grupo (WhatsApp) qual novo documento está em vigor. Exemplo: "Pessoal, atualizei os requisitos para a v1.1. Favor ler o bloco de changelog no topo do arquivo Capítulo Zero v1.0 antes de codar."
+
+Arquivo "Atual":
+Adicione o arquivo novo junto aos outros arquivos para manter um histórico do que foi feito.
+
+
+2. Estrutura de Arquivos e Histórico
+
+Código:
+
+GitHub: https://github.com/JulioMiguelCczaplinskiK/RA3-Projeto 
+
+
+
+Documentação
+
+
+Capítulo Zero - 
+Capitulo Zero v1.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Introdução
+O mercado de livrarias exige organização precisa no estoque, controle de vendas e gestão de clientes. O Capítulo Zero surge como uma solução robusta para automatizar esses processos em um ambiente de desktop. O projeto foca na prática de desenvolvimento orientado a objetos, separando a lógica de negócio (Model) da interface do usuário (View/Controller), e na implementação de persistência de dados via arquivo.
+
+A aplicação servirá como um sistema integrado onde a entrada de dados é validada, as buscas são ágeis e as operações de exclusão possuem tratamento de exceções para evitar perda de dados críticos ou inconsistências.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Objetivos
+1. Objetivo Geral
+Desenvolver uma aplicação desktop completa para gestão de livraria, permitindo o gerenciamento eficiente de informações através de interfaces gráficas construídas nativamente em Java, garantindo a persistência de dados e a validação de entradas.
+
+
+2. Objetivos Específicos
+Implementar 10 módulos CRUD (Create, Read, Update, Delete) cobrindo as principais entidades do negócio.
+Garantir que cada integrante desenvolva pelo menos 2 classes Model completas com suas respectivas interfaces.
+Construir a interface gráfica (JavaFX) 100% via código, sem uso de ferramentas de visual design (FXML/SceneBuilder).
+Implementar persistência de dados em arquivos de texto ou binários.
+Aplicar tratamento de exceções em todas as operações de I/O e validação de campos.
+Padronizar a interface visual utilizando a paleta de cores definida e formatação correta de dados (datas e números).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Requisitos do Sistema
+1. Requisitos Funcionais (RF)
+RF01: O sistema deve permitir o cadastro de novos registros (Inclusão) para todas as entidades.
+RF02: O sistema deve exibir uma tabela com a listagem de todos os registros (Consulta).
+RF03: Ao selecionar um registro na tabela, o sistema deve abrir um formulário de consulta detalhada.
+RF04: O usuário deve poder alterar os dados de um registro existente (Atualização) a partir da tela de consulta.
+RF05: O usuário deve poder remover um registro (Exclusão) com confirmação prévia.
+RF06: Campos numéricos devem aceitar apenas números e formatar automaticamente (ex: moeda).
+RF07: Campos de data devem ser formatados obrigatoriamente como DD/MM/AAAA.
+RF08: O sistema deve salvar e carregar dados de arquivos locais.
+RF09: O sistema deve tratar erros de entrada (ex: tentar salvar um livro sem título) e exibir mensagens amigáveis.
+RF10: O sistema deve possuir uma tela principal (Menu/Botões) para navegar entre os diferentes módulos.
+RF11: As classes de domínio devem estar separadas das classes de interface.
+RF12: A aplicação deve ser composta por um único programa Java executável.
+
+
+2. Requisitos Não Funcionais (RNF)
+RNF01: Tecnologia: Java 17+ e JavaFX.
+RNF02: Interface: Construção via código puro (proibido SceneBuilder/FXML).
+RNF03: Desempenho: A abertura das janelas deve ocorrer em menos de 2 segundos.
+RNF04: Usabilidade: Interface limpa, discreta e intuitiva.
+RNF05: Cores: Uso estrito da paleta definida (#606c38, #283618, #fefae0, #dda15e, #bc6c25).
+RNF06: Idioma: Toda a interface em Português do Brasil.
+RNF07: Código: Comentários explicativos e nomeação clara de variáveis (CamelCase para classes, snake_case ou camelCase para variáveis conforme padrão Java).
+
+
+
+
+Escopo dos CRUDs (10 Módulos)
+Considerando o contexto de uma livraria e a necessidade de 10 módulos para 5 alunos (2 cada), sugere-se as seguintes classes Model. Cada classe deve ter pelo menos 3 atributos.
+
+
+#
+Classe Model
+Atributos Sugeridos
+Responsável
+1
+Livro
+Código, Título, Autor, Editora, Categoria, Ano, Preço
+Julio
+2
+Autor
+Código, Nome, Nacionalidade, Data de Nascimento
+Gabriel
+3
+Cliente
+Nome, CPF, Telefone, Endereço
+Gustavo
+4
+Vendedor
+Matrícula, Nome, Turno, Status
+Gustavo
+5
+Editora
+Código, Nome, CNPJ, Endereço, Telefone
+João
+6
+Categoria
+Código, Nome, Descrição, Tipo
+Gabriel
+7
+Venda
+Código, Data, Cliente, Vendedor, Itens Vendidos, Valor Total, Status
+Julio
+8
+Produto de Papelaria
+Código, Nome, Tipo, Marca, Categoria, Fornecedor, Preço Unitário
+Emanuel
+9
+Estoque
+Código, Item, Quantidade Disponível
+Emanuel
+10
+Fornecedor
+Código, Nome, CNPJ, Telefone, E-mail
+João
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Requisitos Teóricos e Técnicos (JavaFX)
+Para cumprir o projeto, a equipe precisará dominar os seguintes conceitos e componentes do JavaFX:
+
+1. Componentes de Interface (UI Controls)
+Label: Para exibir textos estáticos e títulos.
+TextField e TextArea: Para entrada de dados textuais.
+PasswordField: Para senhas (se necessário).
+Button: Para ações (Salvar, Cancelar, Excluir).
+ComboBox: Para listagens suspensas (ex: selecionar Autor ao cadastrar Livro).
+DatePicker: Para campos de data (configuração de formato PT-BR).
+TableView: Para exibir listas de dados (Consulta).
+TableColumn: Para definir as colunas da tabela.
+CheckBox e RadioButton: Para opções binárias ou exclusivas.
+2. Layouts (Gerenciadores de Posicionamento)
+VBox e HBox: Para organizar componentes vertical e horizontalmente.
+GridPane: Essencial para alinhar formulários (Label ao lado do TextField) de forma organizada.
+BorderPane: Para estruturar a janela principal (Menu no topo, conteúdo no centro).
+StackPane: Para sobrepor elementos (ex: mensagens de erro).
+3. Conceitos Avançados
+Binding e Observables: Para atualizar a tabela automaticamente quando os dados mudam.
+Tratamento de Exceções: try-catch-finally para operações de arquivo e validação de entrada.
+IO (Input/Output): FileWriter, BufferedReader, ObjectOutputStream (ou lógica de texto customizada) para persistência.
+Validação de Formulário: Lógica para impedir salvar campos vazios ou formatos inválidos.
+CSS In-line: Estilização via código (já que FXML é proibido) para aplicar as cores do projeto.
+
+
+
+
+
+
+
+
+
+Identidade Visual e Interface
+1. Tipografia
+Fonte Principal: Segoe UI, Roboto ou Arial (Sans-serif) para boa legibilidade em telas.
+Títulos: Negrito, tamanho 16-18px.
+Campos: Tamanho 12-14px.
+2. Estrutura da Main (Janela Principal)
+
+Topo (BorderPane.TOP): Menu ou barra de botões com ícones e rótulos para acessar as 12 telas. Fundo #283618.
+Centro (BorderPane.CENTER): Onde as telas de CRUDs serão carregadas dinamicamente. Fundo #fefae0.
+Rodapé (BorderPane.BOTTOM): Barra de status com mensagem de "Sistema pronto" ou informações do usuário logado. Fundo #606c38.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Divisão de Tarefas e Equipe
+Cada integrante é responsável pelo ciclo completo de 2 Classes Model (Lógica + Interface Persistência).
+
+
+Emanuel: Modulo Estoque e Modulo Produto de Papelaria
+Gabriel: Módulo Autor e Módulo Categoria.
+Gustavo: Módulo Cliente e Módulo Vendedor.
+João: Módulo Editora e Módulo Fornecedor.
+Julio: Módulo Livro e Módulo Venda.
+
+
+Tarefas Comuns (Todos os alunos):
+
+Criar a classe Model (POJO) com getters, setters e construtores.
+Criar a classe de Interface Gráfica (sem FXML) para Inclusão, Consulta, Edição e Exclusão.
+Implementar a persistência (salvar/carregar do arquivo) para sua classe.
+Implementar tratamento de exceções (try-catch) em toda a classe.
+Validar campos (datas, números).
+Integrar o código no repositório central.
+Tarefa Central (Liderança/Arquiteto - Pode ser dividido ou rotativo):
+
+Criar a MainApplication (Menu Principal).
+Definir as classes de utilitários (ex: ValidadorDeDados, ArquivoManager).
+Unificar as fontes e cores em uma classe EstiloCSS (aplicado via código).
+
