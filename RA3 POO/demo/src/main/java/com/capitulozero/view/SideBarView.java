@@ -110,6 +110,9 @@ public class SideBarView extends VBox {
                 case "👤 Autores":
                     conteudoOpcoes.getChildren().add(new AutoresView(w, h));
                     break;
+                case "📁 Categoria":
+                    conteudoOpcoes.getChildren().add(new CategoriaView(w, h));
+                    break;
                 case "🛒 Carrinho":
                     conteudoOpcoes.getChildren().add(new CarrinhoView(w, h));
                     break;
